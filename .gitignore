@@ -1,0 +1,8 @@
+# Secrets (never commit plaintext secrets)
+*.env
+*.secret
+secrets/
+
+# OS
+.DS_Store
+Thumbs.db
