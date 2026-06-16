@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: metube-sync
+  namespace: app-dev
+spec:
+  schedule: "0 */3 * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: sync
+              image: alpine:3.20
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  apk add --no-cache rsync > /dev/null
+                  echo "[$(date)] push pod-0 -> pod-1"
+                  rsync -av --ignore-existing \
+                    rsync://metube-0.metube-headless.app-dev.svc.cluster.local/downloads/ \
+                    rsync://metube-1.metube-headless.app-dev.svc.cluster.local/downloads/
+                  echo "[$(date)] push pod-1 -> pod-0"
+                  rsync -av --ignore-existing \
+                    rsync://metube-1.metube-headless.app-dev.svc.cluster.local/downloads/ \
+                    rsync://metube-0.metube-headless.app-dev.svc.cluster.local/downloads/
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                limits:
+                  cpu: 200m
+                  memory: 128Mi

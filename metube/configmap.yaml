@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metube-rsyncd-conf
+  namespace: app-dev
+data:
+  rsyncd.conf: |
+    uid = 1000
+    gid = 1000
+    use chroot = no
+    log file = /dev/stdout
+    [downloads]
+    path = /downloads
+    read only = no
+    hosts allow = *

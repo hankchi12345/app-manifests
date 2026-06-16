@@ -1,11 +1,29 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: metube-headless
+  namespace: app-dev
+spec:
+  clusterIP: None
+  selector:
+    app: metube
+  ports:
+    - name: http
+      port: 8081
+      targetPort: 8081
+    - name: rsync
+      port: 873
+      targetPort: 873
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: metube
   namespace: app-dev
 spec:
   selector:
     app: metube
+  sessionAffinity: ClientIP
   ports:
     - port: 80
       targetPort: 8081
