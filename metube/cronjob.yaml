@@ -13,12 +13,11 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: sync
-              image: alpine:3.20
+              image: eeacms/rsync:latest
               command:
                 - /bin/sh
                 - -c
                 - |
-                  apk add --no-cache rsync > /dev/null
                   echo "[$(date)] push pod-0 -> pod-1"
                   rsync -av --ignore-existing \
                     rsync://metube-0.metube-headless.app-dev.svc.cluster.local/downloads/ \

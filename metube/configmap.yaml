@@ -8,7 +8,6 @@ data:
     uid = 1000
     gid = 1000
     use chroot = no
-    log file = /dev/stdout
     [downloads]
     path = /downloads
     read only = no

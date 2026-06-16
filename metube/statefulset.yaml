@@ -44,14 +44,15 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
         - name: rsyncd
-          image: alpine:3.20
+          image: eeacms/rsync:latest
           securityContext:
             runAsUser: 0
             runAsNonRoot: false
           command:
-            - /bin/sh
-            - -c
-            - "apk add --no-cache rsync > /dev/null && exec rsync --daemon --no-detach --config=/etc/rsyncd/rsyncd.conf"
+            - rsync
+            - --daemon
+            - --no-detach
+            - --config=/etc/rsyncd/rsyncd.conf
           ports:
             - containerPort: 873
               name: rsync
