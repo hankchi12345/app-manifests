@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: metube
+  namespace: app-dev
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`metube.lab-hc.cloud`)
+      kind: Rule
+      services:
+        - name: metube
+          port: 80
+          sticky:
+            cookie:
+              name: metube_sticky
+              httpOnly: true
+              sameSite: lax

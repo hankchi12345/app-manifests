@@ -4,5 +4,5 @@ resources:
   - configmap.yaml
   - statefulset.yaml
   - service.yaml
-  - ingress.yaml
+  - ingressroute.yaml
   - cronjob.yaml
