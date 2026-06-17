@@ -21,7 +21,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: metube
-          image: ghcr.io/alexta69/metube:2026.06.13
+          image: ghcr.io/alexta69/metube:2026.06.16
           ports:
             - containerPort: 8081
           volumeMounts:
