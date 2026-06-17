@@ -13,6 +13,8 @@ spec:
       labels:
         app: metube
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: debian-worker-204-26-5
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -45,4 +47,4 @@ spec:
       volumes:
         - name: downloads
           persistentVolumeClaim:
-            claimName: metube-downloads
+            claimName: metube-downloads-primary
