@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: metube-downloads-standby
+  name: metube-downloads
   namespace: app-dev
 spec:
-  storageClassName: local-path
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
