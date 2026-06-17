@@ -23,7 +23,6 @@ metadata:
 spec:
   selector:
     app: metube
-  sessionAffinity: ClientIP
   ports:
     - port: 80
       targetPort: 8081
