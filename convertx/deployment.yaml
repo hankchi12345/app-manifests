@@ -24,6 +24,8 @@ spec:
                 secretKeyRef:
                   name: convertx-secret
                   key: JWT_SECRET
+            - name: ALLOW_UNAUTHENTICATED
+              value: "true"
           volumeMounts:
             - name: data
               mountPath: /app/data
