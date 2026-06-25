@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: filecodebox
-          image: vastsa/filecodebox:latest
+          image: lanol/filecodebox:latest
           ports:
             - containerPort: 12345
           volumeMounts:
