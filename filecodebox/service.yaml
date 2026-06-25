@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: filecodebox
+  namespace: app-dev
+spec:
+  selector:
+    app: filecodebox
+  ports:
+    - port: 80
+      targetPort: 12345
