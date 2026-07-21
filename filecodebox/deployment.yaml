@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: filecodebox
-          image: lanol/filecodebox:latest
+          image: lanol/filecodebox:edge-c676458
           ports:
             - containerPort: 12345
           volumeMounts:
