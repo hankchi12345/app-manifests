@@ -1,15 +1,15 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: filecodebox
+  name: pingvin-share
   namespace: app-dev
 spec:
   entryPoints:
     - web
     - websecure
   routes:
-    - match: Host(`filecodebox.lab-hc.cloud`)
+    - match: Host(`pingvin.lab-hc.cloud`)
       kind: Rule
       services:
-        - name: filecodebox
+        - name: pingvin-share
           port: 80

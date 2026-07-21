@@ -1,44 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: filecodebox
+  name: pingvin-share
   namespace: app-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: filecodebox
+      app: pingvin-share
   template:
     metadata:
       labels:
-        app: filecodebox
+        app: pingvin-share
     spec:
       containers:
-        - name: filecodebox
-          image: lanol/filecodebox:edge-c676458
+        - name: pingvin-share
+          image: stonith404/pingvin-share:latest
           ports:
-            - containerPort: 12345
+            - containerPort: 3000
           volumeMounts:
             - name: data
-              mountPath: /app/data
+              mountPath: /opt/app/backend/data
           resources:
             requests:
               cpu: 100m
               memory: 256Mi
             limits:
-              cpu: 500m
-              memory: 2048Mi
+              cpu: 1000m
+              memory: 1024Mi
           livenessProbe:
             tcpSocket:
-              port: 12345
+              port: 3000
             initialDelaySeconds: 10
             periodSeconds: 30
           readinessProbe:
             tcpSocket:
-              port: 12345
+              port: 3000
             initialDelaySeconds: 5
             periodSeconds: 10
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: filecodebox-data
+            claimName: pingvin-share-data
