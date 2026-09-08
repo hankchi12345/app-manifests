@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle-free
+  namespace: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oracle-free
+  template:
+    metadata:
+      labels:
+        app: oracle-free
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: oracle-free
+          image: container-registry.oracle.com/database/free:latest
+          ports:
+            - containerPort: 1521
+          volumeMounts:
+            - name: database_storage
+              mountPath: /database_storage
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 2048Mi
+          livenessProbe:
+            tcpSocket:
+              port: 1521
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            tcpSocket:
+              port: 1521
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: database_storage
+          persistentVolumeClaim:
+            claimName: database_storage

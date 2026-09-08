@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingvin-share
-          image: stonith404/pingvin-share:latest
+          image: ghcr.io/stonith404/pingvin-share:v1.13
           ports:
             - containerPort: 3000
           volumeMounts:
