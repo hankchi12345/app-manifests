@@ -23,7 +23,7 @@ spec:
           ports:
             - containerPort: 1521
           volumeMounts:
-            - name: database_storage
+            - name: database-storage
               mountPath: /database_storage
           resources:
             requests:
@@ -43,6 +43,6 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
       volumes:
-        - name: database_storage
+        - name: database-storage
           persistentVolumeClaim:
-            claimName: database_storage
+            claimName: database-storage
