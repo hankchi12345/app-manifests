@@ -25,13 +25,15 @@ spec:
           volumeMounts:
             - name: database-storage
               mountPath: /database_storage
+            - name: shm
+              mountPath: /dev/shm
           resources:
             requests:
               cpu: 50m
               memory: 128Mi
             limits:
               cpu: 500m
-              memory: 2048Mi
+              memory: 3Gi
           livenessProbe:
             tcpSocket:
               port: 1521
@@ -46,3 +48,7 @@ spec:
         - name: database-storage
           persistentVolumeClaim:
             claimName: database-storage
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi
