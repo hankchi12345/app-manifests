@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox
+  namespace: observation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackbox
+  template:
+    metadata:
+      labels:
+        app: blackbox
+    spec:
+      containers:
+      - name: blackbox
+        image: quay.io/prometheus/blackbox-exporter:v0.28.0
+        ports:
+        - containerPort: 9115
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 1024Mi
